@@ -1,30 +1,21 @@
-import React, { createContext, useReducer } from 'react'
-import { generateReducer } from './reducer'
-import { generateActions } from './actions'
+import React, { createContext, useEffect } from 'react'
 import useAsyncToken from './useAsyncToken'
+import { useStore } from '../storeManager'
+import { state, actions } from './store'
 
-async function retrieveToken() {
-  const { token } = useAsyncToken()
+export const AuthContext = createContext()
 
-  return Boolean(await token)
-}
+export function AuthProvider({ children }) {
+  const storedToken = useAsyncToken()
+  const utils = { ...storedToken }
+  const { retrieveToken, ...store } = useStore(state, actions, utils)
 
-const initialState = {
-  isAuthenticated: false,
-  accessToken: null,
-  error: null,
-}
-
-export const AuthContext = createContext(retrieveToken())
-
-export function AuthProvider({ value, children }) {
-  const [state, dispatch] = useReducer(generateReducer(AuthContext), {
-    ...initialState,
-    ...value,
-  })
+  useEffect(() => {
+    retrieveToken()
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ ...state, ...generateActions(dispatch) }}>
+    <AuthContext.Provider value={store}>
       {children}
     </AuthContext.Provider>
   )

@@ -6,7 +6,7 @@ function useAsyncToken() {
   const { getItem, setItem, removeItem } = useAsyncStorage(STORAGE_KEY)
 
   return {
-    token: getItem(),
+    getToken: getItem,
     setToken: setItem,
     destroyToken: removeItem,
   }
