@@ -1,40 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { Archivo_400Regular as Archivo400, Archivo_700Bold as Archivo700 } from '@expo-google-fonts/archivo'
+import * as SplashScreen from 'expo-splash-screen'
 import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading'
-import Routes from './routes'
 import ContextProvider from './contexts'
-import { useAuth } from './hooks'
+import Routes from './routes'
 
 function App() {
-  const tokenRetrieved = useAuth()
-  const [isAuthenticated, setAuthenticated] = useState(false)
+  const [authLoaded, setAuthLoaded] = useState(false)
   const [fontsLoaded] = useFonts({ Archivo400, Archivo700 })
-  const [ctxLoaded, setCtxLoaded] = useState(false)
-  const isLoading = !ctxLoaded || !fontsLoaded
+  const isLoading = !authLoaded || !fontsLoaded
 
-  async function initializeCtx() {
-    const hasValidToken = await tokenRetrieved
-
-    setAuthenticated(hasValidToken)
-    setCtxLoaded(true)
+  function handleAuthLoaded() {
+    setAuthLoaded(true)
   }
 
   useEffect(() => {
-    initializeCtx()
-  }, [])
+    if (isLoading) {
+      SplashScreen.preventAutoHideAsync()
+    } else {
+      SplashScreen.hideAsync()
+    }
+  }, [isLoading])
 
   return (
-    <Choose>
-      <When condition={isLoading}>
-        <AppLoading />
-      </When>
-      <Otherwise>
-        <ContextProvider auth={{ isAuthenticated }}>
-          <Routes />
-        </ContextProvider>
-      </Otherwise>
-    </Choose>
+    <ContextProvider>
+      <Routes appLoading={isLoading} onAuthLoad={handleAuthLoaded} />
+    </ContextProvider>
   )
 }
 

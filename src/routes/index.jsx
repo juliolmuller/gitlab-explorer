@@ -1,23 +1,30 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import PublicRoutes from './public'
 import AuthRoutes from './auth'
 import { useAuth } from '../hooks'
 
-function Routes() {
-  const { isAuthenticated } = useAuth()
+function Routes({ appLoading, onAuthLoad }) {
+  const { isAuthLoaded, isAuthenticated } = useAuth()
+  const notifyAuthLoaded = useCallback(onAuthLoad, [])
+
+  useEffect(() => {
+    isAuthLoaded && notifyAuthLoaded()
+  }, [isAuthLoaded])
 
   return (
-    <NavigationContainer>
-      <Choose>
-        <When condition={isAuthenticated}>
-          <AuthRoutes />
-        </When>
-        <Otherwise>
-          <PublicRoutes />
-        </Otherwise>
-      </Choose>
-    </NavigationContainer>
+    <If condition={!appLoading}>
+      <NavigationContainer>
+        <Choose>
+          <When condition={isAuthenticated}>
+            <AuthRoutes />
+          </When>
+          <Otherwise>
+            <PublicRoutes />
+          </Otherwise>
+        </Choose>
+      </NavigationContainer>
+    </If>
   )
 }
 
