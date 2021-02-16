@@ -39,5 +39,6 @@ module.exports = {
     'react/jsx-closing-bracket-location': 'error',
     'react/jsx-no-undef': ['error', { allowGlobals: true }],
     'react/prop-types': 'off',
+    'react-native/no-color-literals': 'off',
   },
 }
