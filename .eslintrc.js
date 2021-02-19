@@ -8,8 +8,8 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:react-native/all',
-    'plugin:jsx-control-statements/recommended',
     '@lacussoft',
+    'plugin:jsx-control-statements/recommended',
   ],
   globals: {
     alert: true,
@@ -31,7 +31,7 @@ module.exports = {
     'jsx-control-statements',
   ],
   rules: {
-    'camelcase': ['error', { allow: ['grant_type', 'access_token', 'token_type', 'refresh_token'] }],
+    'camelcase': ['error', { allow: ['grant_type', 'access_token', 'order_by'] }],
     'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-use-before-define': 'off',
