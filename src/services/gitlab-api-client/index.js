@@ -1,5 +1,5 @@
 import http from './http-client'
-import endpoints from './endpoints'
+import * as endpoints from './endpoints'
 
 const AUTHORIZATION_HEADER = 'Authorization'
 
@@ -13,14 +13,34 @@ class GitLabApi {
   }
 
   async signIn(username, password) {
-    const endPoint = endpoints.auth
+    const uri = endpoints.auth
     const data = { grant_type: 'password', username, password }
-    const response = await this.http.post(endPoint, data)
+    const response = await this.http.post(uri, data)
     const token = response.data.access_token
 
     this.setToken(token)
 
     return token
+  }
+
+  async getRepositories(search = '') {
+    const uri = endpoints.projects
+    const response = await this.http.get(uri, {
+      params: {
+        order_by: 'last_activity_at',
+        simple: true,
+        search,
+      },
+    })
+
+    return response.data
+  }
+
+  async getRepositoryDetails(id) {
+    const uri = `${endpoints.projects}/${id}`
+    const response = await this.http.get(uri)
+
+    return response.data
   }
 }
 
