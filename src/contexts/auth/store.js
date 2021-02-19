@@ -1,4 +1,3 @@
-// import http from '../../services/http'
 
 export const state = {
   isAuthLoaded: false,
@@ -10,6 +9,8 @@ export const actions = {
   async retrieveToken({ utils }) {
     const token = await utils.getToken()
 
+    utils.http.setToken(token)
+
     return {
       isAuthLoaded: true,
       isAuthenticated: !!token,
@@ -17,7 +18,7 @@ export const actions = {
     }
   },
   async signIn({ utils }, username, password) {
-    const token = username + password
+    const token = await utils.http.signIn(username, password)
     await utils.setToken(token)
 
     return {

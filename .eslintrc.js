@@ -31,7 +31,7 @@ module.exports = {
     'jsx-control-statements',
   ],
   rules: {
-    'camelcase': ['error', { allow: [] }],
+    'camelcase': ['error', { allow: ['grant_type', 'access_token', 'token_type', 'refresh_token'] }],
     'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-use-before-define': 'off',
