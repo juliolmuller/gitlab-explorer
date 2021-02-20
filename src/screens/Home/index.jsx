@@ -3,29 +3,27 @@ import { ScrollView, Text, View } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import Suspense from '../../components/Suspense'
 import gitlab from '../../services/gitlab-api-client'
+import { useDebouncedCallback } from '../../hooks'
 import styles from './styles'
+
+const DEBOUNCE_TIME = 500
 
 function Home() {
   const [repos, setRepos] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [searchText, setSearchText] = useState('')
 
-  async function fetchRepos() {
-    const reposPromise = gitlab.getRepositories()
+  const fetchRepos = useDebouncedCallback(async (search) => {
+    const reposPromise = gitlab.getRepositories(search)
 
     setLoading(true)
     setRepos(await reposPromise)
     setLoading(false)
-  }
-
-  function handleSearch(value) {
-    setSearchText(value)
-    console.log(`"${value}"`)
-  }
+  }, DEBOUNCE_TIME)
 
   useEffect(() => {
-    fetchRepos()
-  }, [])
+    fetchRepos(searchText)
+  }, [searchText])
 
   return (
     <View style={styles.screen}>
@@ -33,8 +31,9 @@ function Home() {
         lightTheme round
         inputStyle={styles.searchInput}
         placeholder="Search for repos..."
-        onChangeText={handleSearch}
+        onChangeText={setSearchText}
         value={searchText}
+        autoCapitalize="none"
       />
 
       <Suspense isLoading={isLoading}>
