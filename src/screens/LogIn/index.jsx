@@ -22,6 +22,7 @@ function LogIn() {
       setLoading(true)
       await signIn(username, password)
     } catch (error) {
+      console.warn(error)
       setMessage(error.message)
       setLoading(false)
     }
