@@ -33,7 +33,7 @@ function useAsyncFavorites() {
   async function removeFavorite(repoId) {
     const oldFavorites = await getFavorites()
     const newFavorites = oldFavorites.filter(
-      ({ id }) => id === repoId,
+      ({ id }) => id !== repoId,
     )
 
     await setFavorites(newFavorites)
