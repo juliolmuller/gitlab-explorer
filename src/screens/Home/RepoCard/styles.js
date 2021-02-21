@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native'
+import { color, font } from '../../../theme'
 
 export default StyleSheet.create({
   avatar: {
     alignItems: 'center',
-    backgroundColor: 'rgba(252,109,38, 0.5)',
+    backgroundColor: color.secondaryLight,
     borderRadius: 8,
     height: 75,
     justifyContent: 'center',
@@ -12,7 +13,7 @@ export default StyleSheet.create({
   },
   avatarFallback: {
     color: '#fff',
-    fontFamily: 'Archivo700',
+    fontFamily: font.bold,
     fontSize: 28,
     textTransform: 'uppercase',
   },
@@ -32,19 +33,19 @@ export default StyleSheet.create({
     padding: 4,
   },
   counter: {
-    fontFamily: 'Archivo700',
+    fontFamily: font.bold,
     marginLeft: 2,
     marginRight: 14,
   },
   owner: {
     flex: 1,
-    fontFamily: 'Archivo400',
+    fontFamily: font.regular,
     textTransform: 'uppercase',
   },
   row: {
     flexDirection: 'row',
   },
   title: {
-    fontFamily: 'Archivo700',
+    fontFamily: font.bold,
   },
 })

@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
+import { color, font } from '../../theme'
 
 export default StyleSheet.create({
   fallbackText: {
-    fontFamily: 'Archivo400',
+    fontFamily: font.regular,
   },
   fallbackWrapper: {
     alignItems: 'center',
@@ -10,12 +11,12 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   screen: {
-    backgroundColor: '#ddd',
+    backgroundColor: color.whitish,
     height: '100%',
   },
   searchInput: {
     color: '#000',
-    fontFamily: 'Archivo400',
+    fontFamily: font.regular,
     fontSize: 16,
   },
 })

@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
+import { color, font } from '../../theme'
 
 export default StyleSheet.create({
   btn: {
-    backgroundColor: '#FC6D26',
+    backgroundColor: color.secondary,
   },
   btnContainer: {
     textTransform: 'uppercase',
@@ -21,17 +22,17 @@ export default StyleSheet.create({
     width: '90%',
   },
   input: {
-    backgroundColor: 'rgba(222, 222, 222, 0.8)',
+    backgroundColor: color.whitishLight,
     color: '#000',
-    fontFamily: 'Archivo400',
+    fontFamily: font.regular,
   },
   inputIcon: {
-    backgroundColor: 'rgba(222, 222, 222, 0.8)',
+    backgroundColor: color.whitishLight,
     paddingHorizontal: 10,
   },
   label: {
     color: '#fff',
-    fontFamily: 'Archivo400',
+    fontFamily: font.regular,
     fontSize: 18,
     marginLeft: 4,
   },
@@ -42,7 +43,7 @@ export default StyleSheet.create({
   },
   screen: {
     alignItems: 'center',
-    backgroundColor: '#2089dc',
+    backgroundColor: color.primary,
     height: '100%',
     justifyContent: 'center',
   },

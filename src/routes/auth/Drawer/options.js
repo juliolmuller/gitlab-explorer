@@ -1,6 +1,7 @@
 import SearchIcon from './SearchIcon'
 import FavoritesIcon from './FavoritesIcon'
 import SignOutIcon from './SignOutIcon'
+import { color, font } from '../../../theme'
 
 export default {
   navigator: {
@@ -8,16 +9,16 @@ export default {
     backBehavior: 'initialRoute',
     drawerPosition: 'right',
     drawerStyle: {
-      backgroundColor: '#fafafc',
+      backgroundColor: color.whitishLight,
     },
     drawerContentOptions: {
       labelStyle: {
-        fontFamily: 'Archivo700',
+        fontFamily: font.bold,
       },
-      inactiveBackgroundColor: '#fafafc',
-      inactiveTintColor: '#2089dc',
-      activeBackgroundColor: 'rgba(32, 137, 220, 0.5)',
-      activeTintColor: '#fafafc',
+      inactiveBackgroundColor: color.whitishLight,
+      inactiveTintColor: color.primary,
+      activeBackgroundColor: color.primaryLight,
+      activeTintColor: color.whitishLight,
     },
   },
   screen: {
