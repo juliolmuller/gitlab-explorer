@@ -1,14 +1,36 @@
+import SearchIcon from './SearchIcon'
+import FavoritesIcon from './FavoritesIcon'
 import SignOutIcon from './SignOutIcon'
-import MainIconIcon from './MainIcon'
 
 export default {
+  navigator: {
+    initialRouteName: 'explorer',
+    backBehavior: 'initialRoute',
+    drawerPosition: 'right',
+    drawerStyle: {
+      backgroundColor: '#fafafc',
+    },
+    drawerContentOptions: {
+      labelStyle: {
+        fontFamily: 'Archivo700',
+      },
+      inactiveBackgroundColor: '#fafafc',
+      inactiveTintColor: '#2089dc',
+      activeBackgroundColor: 'rgba(32, 137, 220, 0.5)',
+      activeTintColor: '#fafafc',
+    },
+  },
   screen: {
-    main: {
+    explorer: {
       title: 'Explorador',
-      drawerIcon: MainIconIcon,
+      drawerIcon: SearchIcon,
+    },
+    favorites: {
+      title: 'Favoritos',
+      drawerIcon: FavoritesIcon,
     },
     logout: {
-      title: 'Desconectar',
+      title: 'Sair',
       drawerIcon: SignOutIcon,
     },
   },
