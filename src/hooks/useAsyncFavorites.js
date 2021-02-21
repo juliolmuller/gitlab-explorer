@@ -9,17 +9,25 @@ function useAsyncFavorites() {
     return await getItem() ?? []
   }
 
-  async function addFavorite(newFavorite) {
+  async function findFavorite(repoId) {
     const favorites = await getFavorites()
 
-    favorites.push(newFavorite)
+    return Boolean(favorites.find(
+      ({ id }) => id === repoId,
+    ))
+  }
+
+  async function addFavorite(repo) {
+    const favorites = await getFavorites()
+
+    favorites.push(repo)
     await setItem(favorites)
   }
 
-  async function removeFavorite(favoriteId) {
+  async function removeFavorite(repoId) {
     const oldFavorites = await getFavorites()
     const newFavorites = oldFavorites.filter(
-      ({ id }) => id === favoriteId,
+      ({ id }) => id === repoId,
     )
 
     await setItem(newFavorites)
@@ -27,6 +35,7 @@ function useAsyncFavorites() {
 
   return {
     getFavorites,
+    findFavorite,
     addFavorite,
     removeFavorite,
   }
