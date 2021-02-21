@@ -1,10 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from 'react-native-elements'
-
-const styles = {
-  marginHorizontal: 12,
-}
+import styles from './styles'
 
 function BackIcon() {
   const { goBack } = useNavigation()
@@ -14,7 +11,7 @@ function BackIcon() {
       name="arrow-back"
       type="material"
       onPress={goBack}
-      iconStyle={styles}
+      iconStyle={styles.icon}
     />
   )
 }

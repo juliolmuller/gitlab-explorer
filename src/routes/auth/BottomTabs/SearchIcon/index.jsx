@@ -1,15 +1,15 @@
 import React from 'react'
 import { Icon } from 'react-native-elements'
 
-function HomeIcon({ color, size }) {
+function SearchIcon({ color, size }) {
   return (
     <Icon
-      name="home"
-      type="feather"
+      name="search"
+      type="material"
       color={color}
       size={size}
     />
   )
 }
 
-export default HomeIcon
+export default SearchIcon

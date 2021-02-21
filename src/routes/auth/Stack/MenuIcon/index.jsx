@@ -1,10 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from 'react-native-elements'
-
-const styles = {
-  marginHorizontal: 12,
-}
+import styles from './styles'
 
 function MenuIcon() {
   const { toggleDrawer } = useNavigation()
@@ -14,7 +11,7 @@ function MenuIcon() {
       name="menu"
       type="material"
       onPress={toggleDrawer}
-      iconStyle={styles}
+      iconStyle={styles.icon}
     />
   )
 }

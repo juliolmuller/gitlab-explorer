@@ -1,15 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
-
-const styles = {
-  fontFamily: 'Archivo700',
-  fontSize: 16,
-  textTransform: 'uppercase',
-}
+import styles from './styles'
 
 function Header({ children }) {
   return (
-    <Text style={styles}>
+    <Text style={styles.title}>
       {children}
     </Text>
   )
