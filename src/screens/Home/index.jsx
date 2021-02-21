@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import { ScrollView, Text, View } from 'react-native'
 import { SearchBar } from 'react-native-elements'
+import RepoCard from './RepoCard'
 import Suspense from '../../components/Suspense'
 import gitlab from '../../services/gitlab-api-client'
 import { useAsyncFavorites, useDebouncedCallback } from '../../hooks'
@@ -22,14 +23,12 @@ function Home() {
     setLoading(true)
     setRepos(await reposPromise)
     setLoading(false)
-    console.log('Fetching: ', (await reposPromise)[0])
   }, DEBOUNCE_TIME)
 
   async function retrieveFavorites() {
     setLoading(true)
     setRepos(await getFavorites())
     setLoading(false)
-    console.log('Fetching: ', (await getFavorites())[0])
   }
 
   useEffect(() => {
@@ -52,18 +51,22 @@ function Home() {
       </If>
 
       <Suspense isLoading={isLoading}>
-        <ScrollView contentContainerStyle={styles.wrapper}>
           <Choose>
             <When condition={repos.length}>
-              <For each="repo" of={repos}>
-                <Text key={repo.id}>{repo.name}</Text>
-              </For>
+              <ScrollView style={styles.scrollableWrapper}>
+                <For each="repo" of={repos}>
+                  <RepoCard key={repo.id} repo={repo} />
+                </For>
+              </ScrollView>
             </When>
             <Otherwise>
-              <Text>Nenhum repositório encontrado</Text>
+              <View style={styles.fallbackWrapper}>
+                <Text style={styles.fallbackText}>
+                  Nenhum repositório encontrado 🤔
+                </Text>
+              </View>
             </Otherwise>
           </Choose>
-        </ScrollView>
       </Suspense>
     </View>
   )
