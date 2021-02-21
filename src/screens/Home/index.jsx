@@ -38,9 +38,16 @@ function Home() {
 
       <Suspense isLoading={isLoading}>
         <ScrollView contentContainerStyle={styles.wrapper}>
-          <For each="repo" of={repos}>
-            <Text key={repo.id}>{repo.name}</Text>
-          </For>
+          <Choose>
+            <When condition={repos.length}>
+              <For each="repo" of={repos}>
+                <Text key={repo.id}>{repo.name}</Text>
+              </For>
+            </When>
+            <Otherwise>
+              <Text>Nenhum repositório encontrado</Text>
+            </Otherwise>
+          </Choose>
         </ScrollView>
       </Suspense>
     </View>
