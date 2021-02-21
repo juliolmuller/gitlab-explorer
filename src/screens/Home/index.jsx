@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useRoute } from '@react-navigation/native'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useFocusEffect, useRoute } from '@react-navigation/native'
 import { FlatList, Text, View } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import RepoCard from './RepoCard'
@@ -13,6 +13,7 @@ const DEBOUNCE_TIME = 500
 function Home() {
   const { favorites } = useRoute().params
   const { getFavorites } = useAsyncFavorites()
+  const [isFocused, setFocused] = useState(true)
   const [repos, setRepos] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [searchText, setSearchText] = useState('')
@@ -27,14 +28,18 @@ function Home() {
 
   async function retrieveFavorites() {
     setLoading(true)
+    setFocused(true)
     setRepos(await getFavorites())
     setLoading(false)
   }
 
+  useFocusEffect(useCallback(() => {
+    favorites && retrieveFavorites()
+    return () => setFocused(false)
+  }, [isFocused]))
+
   useEffect(() => {
-    favorites
-      ? retrieveFavorites()
-      : fetchRepos(searchText)
+    favorites || fetchRepos(searchText)
   }, [searchText])
 
   return (
