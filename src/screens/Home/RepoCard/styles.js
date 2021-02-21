@@ -7,7 +7,7 @@ export default StyleSheet.create({
     borderRadius: 8,
     height: 75,
     justifyContent: 'center',
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: 75,
   },
   avatarFallback: {

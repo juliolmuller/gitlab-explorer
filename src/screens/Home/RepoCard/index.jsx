@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Image, Text, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { RectButton } from 'react-native-gesture-handler'
-import { buildAvatarUrl, truncate } from './utils'
+import { buildAvatarUrl, truncate } from '../../../utils'
 import styles from './styles'
 
 function RepoCard({ repo }) {
@@ -20,10 +20,7 @@ function RepoCard({ repo }) {
     <RectButton style={styles.card} onPress={handlePress}>
       <Choose>
         <When condition={avatar}>
-          <Image
-            style={styles.avatar}
-            source={{ uri: avatar }}
-          />
+          <Image style={styles.avatar} source={{ uri: avatar }} />
         </When>
         <Otherwise>
           <View style={styles.avatar}>
