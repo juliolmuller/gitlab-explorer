@@ -6,14 +6,13 @@ export default StyleSheet.create({
   },
   fallbackWrapper: {
     alignItems: 'center',
-    height: '70%',
+    height: 180,
     justifyContent: 'center',
   },
   screen: {
     backgroundColor: '#ddd',
     height: '100%',
   },
-  scrollableWrapper: {},
   searchInput: {
     color: '#000',
     fontFamily: 'Archivo400',

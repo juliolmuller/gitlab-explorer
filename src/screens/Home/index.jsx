@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
-import { ScrollView, Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import RepoCard from './RepoCard'
 import Suspense from '../../components/Suspense'
@@ -51,22 +51,18 @@ function Home() {
       </If>
 
       <Suspense isLoading={isLoading}>
-          <Choose>
-            <When condition={repos.length}>
-              <ScrollView style={styles.scrollableWrapper}>
-                <For each="repo" of={repos}>
-                  <RepoCard key={repo.id} repo={repo} />
-                </For>
-              </ScrollView>
-            </When>
-            <Otherwise>
-              <View style={styles.fallbackWrapper}>
-                <Text style={styles.fallbackText}>
-                  Nenhum repositório encontrado 🤔
-                </Text>
-              </View>
-            </Otherwise>
-          </Choose>
+        <FlatList
+          data={repos}
+          keyExtractor={({ id }) => `${id}`}
+          renderItem={({ item }) => <RepoCard repo={item} />}
+          ListEmptyComponent={() => (
+            <View style={styles.fallbackWrapper}>
+              <Text style={styles.fallbackText}>
+                Nenhum repositório encontrado 🤔
+              </Text>
+            </View>
+          )}
+        />
       </Suspense>
     </View>
   )
