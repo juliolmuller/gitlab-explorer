@@ -1,6 +1,6 @@
 import HeaderTitle from './HeaderTitle'
 import MenuIcon from './MenuIcon'
-// import BackIcon from './BackIcon'
+import BackIcon from './BackIcon'
 
 export default {
   navigatorScreens: {
@@ -10,6 +10,11 @@ export default {
   screen: {
     home: {
       title: 'Repositórios',
+      headerRight: MenuIcon,
+    },
+    details: {
+      title: '',
+      headerLeft: BackIcon,
       headerRight: MenuIcon,
     },
   },

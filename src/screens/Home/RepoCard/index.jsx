@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { Image, Text, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { RectButton } from 'react-native-gesture-handler'
@@ -6,11 +7,17 @@ import { buildAvatarUrl, truncate } from './utils'
 import styles from './styles'
 
 function RepoCard({ repo }) {
+  const { navigate } = useNavigation()
   const avatar = buildAvatarUrl(repo.namespace.avatar_url)
 
-  console.log(repo)
+  function handlePress() {
+    navigate('details', {
+      repoId: repo.id,
+    })
+  }
+
   return (
-    <RectButton style={styles.card}>
+    <RectButton style={styles.card} onPress={handlePress}>
       <Choose>
         <When condition={avatar}>
           <Image
