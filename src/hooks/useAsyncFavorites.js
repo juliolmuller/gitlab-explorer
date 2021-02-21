@@ -5,8 +5,14 @@ const STORAGE_KEY = '@gitlab-explorer::favorites'
 function useAsyncFavorites() {
   const { getItem, setItem } = useAsyncStorage(STORAGE_KEY)
 
+  function setFavorites(favorites) {
+    return setItem(JSON.stringify(favorites))
+  }
+
   async function getFavorites() {
-    return await getItem() ?? []
+    const favorites = await getItem()
+
+    return JSON.parse(favorites) ?? []
   }
 
   async function findFavorite(repoId) {
@@ -21,7 +27,7 @@ function useAsyncFavorites() {
     const favorites = await getFavorites()
 
     favorites.push(repo)
-    await setItem(favorites)
+    await setFavorites(favorites)
   }
 
   async function removeFavorite(repoId) {
@@ -30,7 +36,7 @@ function useAsyncFavorites() {
       ({ id }) => id === repoId,
     )
 
-    await setItem(newFavorites)
+    await setFavorites(newFavorites)
   }
 
   return {
