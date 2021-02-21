@@ -9,7 +9,7 @@ export default {
   },
   screen: {
     home: {
-      title: 'Explorador',
+      title: 'Repositórios',
       headerRight: MenuIcon,
     },
   },
