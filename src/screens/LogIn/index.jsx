@@ -3,6 +3,7 @@ import constants from 'expo-constants'
 import { Image, ScrollView, Text, View } from 'react-native'
 import { Button, Input } from 'react-native-elements'
 import { RectButton } from 'react-native-gesture-handler'
+import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '../../hooks'
 import logo from '../../images/logo.png'
 import styles from './styles'
@@ -30,10 +31,8 @@ function LogIn() {
 
   return (
     <ScrollView contentContainerStyle={styles.screen}>
-      <Image
-        style={styles.logo}
-        source={logo}
-      />
+      <StatusBar style="light" />
+      <Image style={styles.logo} source={logo} />
 
       <View style={styles.form}>
         <Input

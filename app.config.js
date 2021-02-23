@@ -34,6 +34,10 @@ export default {
         backgroundColor: '#2089dc',
       },
     },
+    androidStatusBar: {
+      backgroundColor: '#2089dc',
+      barStyle: 'light-content',
+    },
     ios: {
       supportsTablet: true,
     },
