@@ -28,7 +28,6 @@ function Details() {
     setFavorite(await favoriteFoundPromise)
     setRepo(await repoDetailsPromise)
     setLoading(false)
-    console.log(await repoDetailsPromise) // DEBUG:
   }
 
   function toggleFavorite() {
